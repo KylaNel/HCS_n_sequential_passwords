@@ -19,6 +19,7 @@ from django.urls import path
 from n_sequential_passwords import views
 
 urlpatterns = [
-    path('', views.pattern_lock, name="pattern_lock"),
+    path('', views.index, name="index"),
+    path('pattern_lock/', views.pattern_lock, name="pattern_lock"),
     path('admin/', admin.site.urls),
 ]

@@ -1,0 +1,18 @@
+from django import forms
+from django.db import models
+from django.forms import ModelForm
+from n_sequential_passwords.models import User
+
+class PinForm(ModelForm):
+    pin = forms.IntegerField(max_value = 5)
+
+    class Meta:
+        model = User
+        fields = ("username", "pin")
+
+class PasswordForm(ModelForm):
+    password = forms.CharField(max_length=16)
+
+    class Meta:
+        model = User
+        fields = ("username", "password")

@@ -20,6 +20,7 @@ from n_sequential_passwords import views
 
 urlpatterns = [
     path('', views.index, name="index"),
+    path('pin/', views.pin_login, name='pin'),
     path('pattern_lock/', views.pattern_lock, name="pattern_lock"),
     path('admin/', admin.site.urls),
 ]

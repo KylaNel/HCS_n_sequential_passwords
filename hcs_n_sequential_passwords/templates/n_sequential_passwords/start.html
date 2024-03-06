@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #passwordInput, #pinInput, #patternInput {
+      margin-top: 20px;
+      display: none;
+    }
+    #timer {
+      margin-top: 20px;
+      display: none;
+    }
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login Page</h2>
+    <button id="userNameBtn">User</button>
+    <button id="startTimerBtn">Start Timer</button>
+    <div id="passwordInput">
+      <input type="password" id="passwordField" placeholder="Enter Password">
+      <button id="passwordSubmitBtn">Submit</button>
+    </div>
+    <div id="pinInput">
+      <input type="password" id="pinField" placeholder="Enter PIN">
+      <button id="pinSubmitBtn">Submit</button>
+    </div>
+    <div id="timer"></div>
+    <div id="errorMessages" style="color: red; margin-top: 10px;"></div>
+    <div id="options" style="text-align: left; margin-top: 20px;">
+      <h3>Options:</h3>
+      <button id="setPasswordBtn">Set Password</button><br>
+      <button id="setPinBtn">Set PIN</button><br>
+      <button id="setPatternBtn">Set Pattern</button><br>
+    </div>
+  </div>
+
+  <script> src="static/js/start.js"></script>
+</body>
+</html>

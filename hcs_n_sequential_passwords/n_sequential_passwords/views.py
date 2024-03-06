@@ -16,6 +16,9 @@ def index(request):
 def pattern_lock(request):
     return render(request, 'n_sequential_passwords/pattern_lock.html')
 
+def start(request):
+    return render(request, 'n_sequential_passwords/start.html')
+
 def pin_login(request):
     if request.method == "POST":
         username = request.POST.get('username')

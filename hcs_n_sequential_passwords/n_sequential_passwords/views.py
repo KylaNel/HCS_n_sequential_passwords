@@ -67,4 +67,24 @@ def pin_1_view(request):
 
     return render(request, 'n_sequential_passwords/pin_1.html', {'form': form})
             
+
+def timer(request):
+    return render(request, 'n_sequential_passwords/timer.html')
+
+def prompt(request):
+    if request.method == 'POST':
+        password1 = request.POST.get('password1')
+        pin = request.POST.get('pin')
+        password2 = request.POST.get('password2')
+
+        # Check passwords and pins here
+        # If they are correct, calculate the time taken and return the result
+
+        # For simplicity, let's assume the passwords and pins are correct
+        time_taken = 10  # Placeholder for the time taken
+        return HttpResponse(f'Time taken: {time_taken} seconds')
+
+    return render(request, 'n_sequential_passwords/prompt.html')
+
+
         

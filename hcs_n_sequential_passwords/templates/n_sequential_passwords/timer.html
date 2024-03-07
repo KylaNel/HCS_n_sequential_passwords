@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Timer</title>
+    <script>
+        var startTime;
+
+        function startTimer() {
+            startTime = new Date().getTime();
+            document.getElementById("timerButton").style.display = "none";
+            document.getElementById("passwordForm").style.display = "block";
+        }
+
+        function stopTimer() {
+            var endTime = new Date().getTime();
+            var timeDiff = endTime - startTime;
+            alert("Time taken: " + timeDiff / 1000 + " seconds");
+        }
+    </script>
+</head>
+<body>
+    <button id="timerButton" onclick="startTimer()">Start Timer</button>
+    <form id="passwordForm" method="post" style="display: none;">
+        {% csrf_token %}
+        <label for="password1">Enter Password 1:</label><br>
+        <input type="password" id="password1" name="password1"><br>
+        <label for="pin">Enter PIN:</label><br>
+        <input type="text" id="pin" name="pin"><br>
+        <label for="password2">Enter Password 2:</label><br>
+        <input type="password" id="password2" name="password2"><br>
+        <input type="submit" value="Submit" onclick="stopTimer()">
+    </form>
+</body>
+</html>

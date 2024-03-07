@@ -23,6 +23,7 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('n_sequential_passwords/', include('n_sequential_passwords.urls')),
     path('admin/', admin.site.urls),
-    
-
+    path('start/', views.start, name="start"),
+    path('timer/', views.timer, name='timer_view'),
+    path('prompt/', views.prompt, name='promt'),
 ]

@@ -24,5 +24,6 @@ urlpatterns = [
     path('pattern_lock/', views.pattern_lock, name="pattern_lock"),
     path('admin/', admin.site.urls),
     path('start/', views.start, name="start"),
-
+    path('timer/', views.timer, name='timer_view'),
+    path('prompt/', views.prompt, name='promt'),
 ]

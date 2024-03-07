@@ -16,3 +16,9 @@ class PasswordForm(ModelForm):
     class Meta:
         model = User
         fields = ("username", "password")
+
+class PasswordForm1(forms.Form):
+    password = forms.CharField(label='Enter your password')
+
+class PinForm1(forms.Form):
+    pin = forms.IntegerField(label='Enter your pin')

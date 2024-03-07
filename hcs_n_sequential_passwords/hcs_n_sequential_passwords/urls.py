@@ -16,13 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
 from n_sequential_passwords import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('pin/', views.pin_login, name='pin'),
-    path('pattern_lock/', views.pattern_lock, name="pattern_lock"),
+    path('n_sequential_passwords/', include('n_sequential_passwords.urls')),
     path('admin/', admin.site.urls),
-    path('start/', views.start, name="start"),
+    
 
 ]

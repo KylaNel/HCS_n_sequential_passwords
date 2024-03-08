@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pin</title>
+</head>
+<body>
+    <h2>Pin</h2>
+    <form method="post" action="{% url 'n_sequential_passwords:pin' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Next</button>
+    </form>
+</body>
+</html>

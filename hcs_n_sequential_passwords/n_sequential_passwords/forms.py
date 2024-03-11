@@ -18,7 +18,7 @@ class PasswordForm(ModelForm):
         fields = ("username", "password")
 
 class PasswordForm1(forms.Form):
-    password = forms.CharField(label='Enter your password')
+    password = forms.CharField(label='Enter your password', widget=forms.PasswordInput())
 
 class PinForm1(forms.Form):
-    pin = forms.IntegerField(label='Enter your pin')
+    pin = forms.IntegerField(label='Enter your pin', widget=forms.PasswordInput())

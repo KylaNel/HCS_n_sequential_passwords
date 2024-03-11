@@ -2,14 +2,15 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .forms import PinForm, PasswordForm, PinForm1, PasswordForm1
 
-combos = {"Trickily2500": {"password": "&BDY4s$v!v4s", "pin": "604287", "pattern": None},
-          "Cyclic5576": {"password": "^pP3@BeHSoP4", "pin": "479367", "pattern": None},
-          "Paying0620": {"password": "aVE&!ATu4emz", "pin": "710441", "pattern": None},
-          "Feminism0341": {"password": "&Ew3Rjtjkqn$", "pin": "012483", "pattern": None},
-          "Fretted9336": {"password": "5##kxTtuL&jD", "pin": "869632", "pattern": None},
-          "Sweep1878": {"password": "9d^zKtHPh%5z", "pin": "918423", "pattern": None},
-          "Sinuous6928": {"password": "XkX67as#HgVP", "pin": "351984", "pattern": None},
-          "Vantage1216": {"password": "s@8@ptuQ!2@f", "pin": "812595", "pattern": None},}
+combos = {"pin + pin": ["479367", "710441"],
+          "pin + pin + pin": ["123456", "869632", "918423"],
+          "pin + pin + pin + pin": ["351984", "812595", "918423", "869632"],
+          "password + password": ["^pP3@BeHSoP4", "aVE&!ATu4emz"],
+          "password + password + password": ["&Ew3Rjtjkqn$", "5##kxTtuL&jD", "9d^zKtHPh%5z"],
+          "password + password + password + password": ["XkX67as#HgVP", "s@8@ptuQ!2@f", "9d^zKtHPh%5z", "5##kxTtuL&jD"],
+          "password +pin": ["&BDY4s$v!v4s", "604287"],
+          "password +pin + password + pin": ["^pP3@BeHSoP4", "479367", "aVE&!ATu4emz", "710441"],
+          "password +pin + password": ["^pP3@BeHSoP4", "604287", "aVE&!ATu4emz"],}
 
 def index(request):
     return render(request, 'n_sequential_passwords/index.html')
@@ -55,7 +56,284 @@ def password_view(request):
         form = PasswordForm1()
 
     return render(request, 'n_sequential_passwords/password.html', {'form': form})
-        
+
+def pin_2pin_view_1(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["pin + pin"][0]:
+                request.session["pin_2pin"] = pin
+                return redirect("/n_sequential_passwords/pin_2pin_2")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(str(pin) + "\n")
+    else:
+        form = PinForm1()
+
+    return render(request, 'n_sequential_passwords/pin_2pin_1.html', {'form': form})
+
+def pin_2pin_view_2(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["pin + pin"][1]:
+                request.session["pin_2pin_2"] = pin
+                return redirect("/n_sequential_passwords/success")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(str(pin) + "\n")
+    else:
+        form = PinForm1()
+
+    return render(request, 'n_sequential_passwords/pin_2pin_2.html', {'form': form})
+
+def pin_3pin_view_1(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["pin + pin + pin"][0]:
+                request.session["pin_3pin_1"] = pin
+                return redirect("/n_sequential_passwords/pin_3pin_2")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(str(pin) + "\n")
+    else:
+        form = PinForm1()
+
+    return render(request, 'n_sequential_passwords/pin_3pin_1.html', {'form': form})
+
+def pin_3pin_view_2(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["pin + pin + pin"][1]:
+                request.session["pin_3pin_2"] = pin
+                return redirect("/n_sequential_passwords/pin_3pin_3")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(str(pin) + "\n")
+    else:
+        form = PinForm1()
+    return render(request, 'n_sequential_passwords/pin_3pin_2.html', {'form': form})
+
+def pin_3pin_view_3(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["pin + pin + pin"][2]:
+                request.session["pin_3pin_3"] = pin
+                return redirect("/n_sequential_passwords/success")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(str(pin) + "\n")
+    else:
+        form = PinForm1()
+    return render(request, 'n_sequential_passwords/pin_3pin_3.html', {'form': form})
+
+def pin_4pin_view_1(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["pin + pin + pin + pin"][0]:
+                request.session["pin_4pin_1"] = pin
+                return redirect("/n_sequential_passwords/pin_4pin_2")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(str(pin) + "\n")
+    else:
+        form = PinForm1()
+    return render(request, 'n_sequential_passwords/pin_4pin_1.html', {'form': form})
+
+def pin_4pin_view_2(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["pin + pin + pin + pin"][1]:
+                request.session["pin_4pin_2"] = pin
+                return redirect("/n_sequential_passwords/pin_4pin_3")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(str(pin) + "\n")
+    else:
+        form = PinForm1()
+    return render(request, 'n_sequential_passwords/pin_4pin_2.html', {'form': form})
+
+def pin_4pin_view_3(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["pin + pin + pin + pin"][2]:
+                request.session["pin_4pin_3"] = pin
+                return redirect("/n_sequential_passwords/pin_4pin_4")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(str(pin) + "\n")
+    else:
+        form = PinForm1()
+    return render(request, 'n_sequential_passwords/pin_4pin_3.html', {'form': form})
+
+def pin_4pin_view_4(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["pin + pin + pin + pin"][3]:
+                request.session["pin_4pin_4"] = pin
+                return redirect("/n_sequential_passwords/success")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(str(pin) + "\n")
+    else:
+        form = PinForm1()
+    return render(request, 'n_sequential_passwords/pin_4pin_4.html', {'form': form})
+
+def password_2password_view_1(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password + password"][0]:
+                request.session["password_2password_1"] = password
+                return redirect("/n_sequential_passwords/password_2password_2")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(password + "\n")
+    else:
+        form = PasswordForm1()
+
+    return render(request, 'n_sequential_passwords/password_2password_1.html', {'form': form})
+
+def password_2password_view_2(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password + password"][1]:
+                request.session["password_2password_2"] = password
+                return redirect("/n_sequential_passwords/success")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(password + "\n")
+    else:
+        form = PasswordForm1()
+
+    return render(request, 'n_sequential_passwords/password_2password_2.html', {'form': form})
+
+def password_3password_view_1(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password + password + password"][0]:
+                request.session["password_3password_1"] = password
+                return redirect("/n_sequential_passwords/password_3password_2")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(password + "\n")
+    else:
+        form = PasswordForm1()
+
+    return render(request, 'n_sequential_passwords/password_3password_1.html', {'form': form})
+
+def password_3password_view_2(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password + password + password"][1]:
+                request.session["password_3password_2"] = password
+                return redirect("/n_sequential_passwords/password_3password_3")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(password + "\n")
+    else:
+        form = PasswordForm1()
+
+    return render(request, 'n_sequential_passwords/password_3password_2.html', {'form': form})
+
+def password_3password_view_3(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password + password + password"][2]:
+                request.session["password_3password_3"] = password
+                return redirect("/n_sequential_passwords/success")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(password + "\n")
+    else:
+        form = PasswordForm1()
+    return render(request, 'n_sequential_passwords/password_3password_3.html', {'form': form})
+
+def password_4password_view_1(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password + password + password + password"][0]:
+                request.session["password_4password_1"] = password
+                return redirect("/n_sequential_passwords/password_4password_2")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(password + "\n")
+    else:
+        form = PasswordForm1()
+
+    return render(request, 'n_sequential_passwords/password_4password_1.html', {'form': form})
+
+def password_4password_view_2(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password + password + password + password"][1]:
+                request.session["password_4password_2"] = password
+                return redirect("/n_sequential_passwords/password_4password_3")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(password + "\n")
+    else:
+        form = PasswordForm1()
+    return render(request, 'n_sequential_passwords/password_4password_2.html', {'form': form})
+
+def password_4password_view_3(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password + password + password + password"][2]:
+                request.session["password_4password_3"] = password
+                return redirect("/n_sequential_passwords/password_4password_4")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(password + "\n")
+    else:
+        form = PasswordForm1()
+    return render(request, 'n_sequential_passwords/password_4password_3.html', {'form': form})
+
+def password_4password_view_4(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password + password + password + password"][3]:
+                request.session["password_4password_4"] = password
+                return redirect("/n_sequential_passwords/success")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write(password + "\n")
+    else:
+        form = PasswordForm1()
+    return render(request, 'n_sequential_passwords/password_4password_4.html', {'form': form})
 
 
 def password_1_view(request):
@@ -63,7 +341,7 @@ def password_1_view(request):
         form = PasswordForm1(request.POST)
         if form.is_valid():
             password = form.cleaned_data['password']
-            if password == "&BDY4s$v!v4s":
+            if password == combos["password +pin"][0]:
                 request.session["password_1"] = password
                 return redirect("/n_sequential_passwords/pin_1")
             else:
@@ -80,7 +358,7 @@ def pin_1_view(request):
         form = PinForm1(request.POST)
         if form.is_valid():
             pin = form.cleaned_data['pin']
-            if str(pin) == "604287":
+            if str(pin) == combos["password +pin"][1]:
                 request.session["pin_1"] = pin
                 return redirect("/n_sequential_passwords/success")
             else:
@@ -96,7 +374,7 @@ def password_2_view_1(request):
         form = PasswordForm1(request.POST)
         if form.is_valid():
             password = form.cleaned_data['password']
-            if password == "^pP3@BeHSoP4":
+            if password == combos["password +pin + password"][0]:
                 request.session["password_2"] = password
                 return redirect("/n_sequential_passwords/pin_2")
             else:
@@ -112,7 +390,7 @@ def pin_2_view(request):
         form = PinForm1(request.POST)
         if form.is_valid():
             pin = form.cleaned_data['pin']
-            if str(pin) == "479367":
+            if str(pin) == combos["password +pin + password"][1]:
                 request.session["pin_2"] = pin
                 return redirect("/n_sequential_passwords/password_2_2")
             else:
@@ -128,7 +406,7 @@ def password_2_view_2(request):
         form = PasswordForm1(request.POST)
         if form.is_valid():
             password = form.cleaned_data['password']
-            if password == "aVE&!ATu4emz":
+            if password == combos["password +pin + password"][2]:
                 request.session["password_2_2"] = password
                 return redirect("/n_sequential_passwords/success")
             else:
@@ -139,6 +417,66 @@ def password_2_view_2(request):
         form = PasswordForm1()
     
     return render(request, 'n_sequential_passwords/password_2_2.html', {'form': form})
+
+def password_2password2pin_view_1(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password +pin + password + pin"][0]:
+                request.session["password_2password2pin_1"] = password
+                return redirect("/n_sequential_passwords/pin_2password2pin_1")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write("Password 1 (4 step) " + password + "\n")
+    else:
+        form = PasswordForm1()
+    return render(request, 'n_sequential_passwords/password_2password2pin_1.html', {'form': form})
+
+def pin_2password2pin_view_1(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["password +pin + password + pin"][1]:
+                request.session["pin_2password2pin_1"] = pin
+                return redirect("/n_sequential_passwords/password_2password2pin_2")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write("Pin (4 step) " + str(pin) + "\n")
+    else:
+        form = PinForm1()
+    return render(request, 'n_sequential_passwords/pin_2password2pin_1.html', {'form': form})
+
+def password_2password2pin_view_2(request):
+    if request.method == "POST":
+        form = PasswordForm1(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if password == combos["password +pin + password + pin"][2]:
+                request.session["password_2password2pin_2"] = password
+                return redirect("/n_sequential_passwords/pin_2password2pin_2")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write("Password 2 (4 step) " + password + "\n")
+    else:
+        form = PasswordForm1()
+    return render(request, 'n_sequential_passwords/password_2password2pin_2.html', {'form': form})
+
+def pin_2password2pin_view_2(request):
+    if request.method == "POST":
+        form = PinForm1(request.POST)
+        if form.is_valid():
+            pin = form.cleaned_data['pin']
+            if str(pin) == combos["password +pin + password + pin"][3]:
+                request.session["pin_2password2pin_2"] = pin
+                return redirect("/n_sequential_passwords/success")
+            else:
+                with open("passwords.txt", "a") as f:
+                    f.write("Pin 2 (4 step) " + str(pin) + "\n")
+    else:
+        form = PinForm1()
+    return render(request, 'n_sequential_passwords/pin_2password2pin_2.html', {'form': form})
     
             
 

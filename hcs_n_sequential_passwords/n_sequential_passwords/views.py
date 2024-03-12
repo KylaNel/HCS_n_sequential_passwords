@@ -2,7 +2,9 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .forms import PinForm, PasswordForm, PinForm1, PasswordForm1
 
-combos = {"pin + pin": ["479367", "710441"],
+combos = {"pin": ["604287"],
+          "password": ["&BDY4s$v!v4s"],
+          "pin + pin": ["479367", "710441"],
           "pin + pin + pin": ["123456", "869632", "918423"],
           "pin + pin + pin + pin": ["351984", "812595", "918423", "869632"],
           "password + password": ["^pP3@BeHSoP4", "aVE&!ATu4emz"],
@@ -29,7 +31,7 @@ def pin_view(request):
         form = PinForm1(request.POST)
         if form.is_valid():
             pin = form.cleaned_data['pin']
-            if str(pin) == "604287":
+            if str(pin) == combos["pin"][0]:
                 request.session["pin"] = pin
                 return redirect("/n_sequential_passwords/success")
             else:
@@ -45,7 +47,7 @@ def password_view(request):
         form = PasswordForm1(request.POST)
         if form.is_valid():
             password = form.cleaned_data['password']
-            if password == "&BDY4s$v!v4s":
+            if password == combos["password"][0]:
                 request.session["password"] = password
                 return redirect("/n_sequential_passwords/success")
             else:
